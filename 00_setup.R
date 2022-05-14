@@ -1,8 +1,8 @@
 # iniciando o git ---------------------------------------------------------
 
-usethis::use_git()
-
-usethis::use_github()
+# usethis::use_git()
+# 
+# usethis::use_github()
 
 # criando pastas ----------------------------------------------------------
 
