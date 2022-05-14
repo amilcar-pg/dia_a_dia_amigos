@@ -43,7 +43,7 @@ total_time <- max(E(g)$time)
 #of the time (i.e. 10 snapshots) between adding two consecutive nodes
 dt <- 0.1
 #Output for each frame will be a png with HD size 1600x900 :)
-png(file="animation/example%03d.png", width=1600,height=900)
+png(file="ignore/animation/example%03d.png", width=1600,height=900)
 #Time loop starts
 for(time in seq(3,total_time,dt)){
   #remove edges which are not present
@@ -61,14 +61,11 @@ for(time in seq(3,total_time,dt)){
 }
 dev.off()
 
-
-
 # outra opcao -------------------------------------------------------------
 
 #https://www.r-bloggers.com/2012/11/how-to-network-animation-with-r-and-the-igraph-package-meaning-in-data-viz/
 
 # nesse outro post, ele usa a mesma ideia, mas de outra forma
-
 
 # animation package -------------------------------------------------------
 
