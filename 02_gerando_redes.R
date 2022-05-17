@@ -117,11 +117,13 @@ edges_lst <- lapply(1:length(igraph_list), function(i) {
 edges_df <- do.call("rbind", edges_lst)
 nodes_df <- do.call("rbind", nodes_lst)
 df_time <- data.frame(
-  frame = as.numeric(row.names(df_raw)),
-  frame_time = format(df_raw$hora, format = "%H:%M"))
+  frame = 1:96,
+  frame_time = df_raw$hora)
 
 edges_df <- dplyr::left_join(edges_df, df_time, by = "frame")
 nodes_df <- dplyr::left_join(nodes_df, df_time, by = "frame")
+
+# plotando ----------------------------------------------------------------
 
 p <- ggplot() +
   geom_segment(
@@ -131,19 +133,31 @@ p <- ggplot() +
   ) +
   geom_point(
     data = nodes_df, aes(x, y, group = name, fill = as.factor(atividade)),
-    shape = 21, size = 4, show.legend = FALSE
+    shape = 21, size = 6, show.legend = FALSE
   ) +
   scale_alpha_manual(values = c(0, 1))
 
-anim <- p +
-  ease_aes("quadratic-in-out") +
-  labs(title = "Hora: {closest_state}") +
+# funciona certo, mas não é fluido
+p +
+  labs(title = "Hora: {stringr::str_sub(closest_state, 12, 16)}") +
   transition_states(frame_time, state_length = 0) +
   theme_void()
 
-animate(
-  plot = anim,
-  nframes = 8 * 96,
-  #render = av_renderer("previa_especial.mp4")
-  #render = gifski_renderer("previa_especial.gif")
-  )
+# Começa do frame errado
+p +
+  labs(title = labs(title = 'Hora: {stringr::str_sub(frame_time, 12, 16)}')) +
+  transition_time(frame_time) +
+  theme_void()
+
+# Funciona certo, mas não consigo recuperar a label certa para o título
+p +
+  labs(title = labs(title = 'Hora: {frame_time}')) +
+  transition_time(frame) +
+  theme_void()
+
+# animate(
+#   plot = anim,
+#   nframes = 8 * 96,
+#   #render = av_renderer("previa_especial.mp4")
+#   #render = gifski_renderer("previa_especial.gif")
+#   )

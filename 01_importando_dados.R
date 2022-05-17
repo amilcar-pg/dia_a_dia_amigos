@@ -21,9 +21,6 @@ df_raw <- janitor::clean_names(df_raw)
 
 colnames(df_raw)[23:32] <- atividades
 
-## correcao do formato dos dados
-df_raw$hora <- format(df_raw$hora, format = "%H:%M")
-
 # organizando dados para redes --------------------------------------------
 
 individuos_list <- list()
@@ -70,7 +67,7 @@ for (i in 1:96){
   hourly_list[[i]] <- df_arestas_total |> 
     dplyr::filter(indice == i) |> 
     dplyr::select(-indice, -hora)
-  names(hourly_list)[i] <- df_arestas_total[i,4]
+  names(hourly_list)[i] <- format(df_arestas_total[i,4], format = "%H:%M")
 }; rm(i)
 
 # criando df de vértices
