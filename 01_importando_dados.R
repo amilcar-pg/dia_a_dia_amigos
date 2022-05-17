@@ -4,6 +4,11 @@ df_raw <- googlesheets4::read_sheet(
   "https://docs.google.com/spreadsheets/d/1Dx9Za-b1hqeiKso1E067M1BgF6VhdbGyz9FZJC662Sk/edit#gid=2051768494"
   )[,-2]
 
+atividades <- colnames(df_raw)[23:32]
+
+# inseri uma coluna com cada uma das opções para garantir que todos os nós estarão
+# presentes em todos os horários.
+
 ## gerando um backup
 
 readr::write_csv(df_raw, "output/df_raw.csv")
@@ -13,6 +18,8 @@ readr::write_csv(df_raw, "output/df_raw.csv")
 ## correcao de nomes das colunas
 colnames(df_raw)[1] <- "hora"
 df_raw <- janitor::clean_names(df_raw)
+
+colnames(df_raw)[23:32] <- atividades
 
 ## correcao do formato dos dados
 df_raw$hora <- format(df_raw$hora, format = "%H:%M")
@@ -62,16 +69,15 @@ hourly_list <- list()
 for (i in 1:96){
   hourly_list[[i]] <- df_arestas_total |> 
     dplyr::filter(indice == i) |> 
-    dplyr::select(-indice)
-  names(hourly_list)[i] <- df_arestas_total[i,3]
+    dplyr::select(-indice, -hora)
+  names(hourly_list)[i] <- df_arestas_total[i,4]
 }; rm(i)
 
 # criando df de vértices
 
-df_vertices <- as.data.frame(
-  append(unique(df_arestas_total$source),
-         unique(df_arestas_total$target))
-)
+df_vertices <- as.data.frame(unique(df_arestas_total$source))
+
+colnames(df_vertices) <- "vertices"
 
 # limpando os objetos do ambiente -----------------------------------------
 
@@ -82,3 +88,13 @@ for (i in 1:length(individuos_list)){
   individuos_list[[i]] <- individuos_list[[i]] |> 
     dplyr::select(-indice)
 }; rm(i)
+
+# inserindo informacoes sobre os vertices ---------------------------------
+
+df_vertices <- df_vertices |> 
+  dplyr::mutate(
+    atividade = ifelse(
+    vertices %in% atividades,
+    TRUE,
+    FALSE
+  )); rm(atividades)

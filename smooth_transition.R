@@ -99,21 +99,3 @@ ggplot() +
   transition_states(frame, state_length = 0.5, wrap = FALSE) +
   labs(title = "Wave {closest_state}") +
   theme_void()
-
-
-ggplot() +
-  geom_segment(
-    data = edges_df,
-    aes(x = x, xend = xend, y = y, yend = yend, group = id, alpha = status),
-    show.legend = FALSE
-  ) +
-  geom_point(
-    data = nodes_df, aes(x, y, group = name, fill = as.factor(smoke)),
-    shape = 21, size = 4, show.legend = FALSE
-  ) +
-  scale_fill_manual(values = c("forestgreen", "grey25", "firebrick")) +
-  scale_alpha_manual(values = c(0, 1)) +
-  ease_aes("quadratic-in-out") +
-  transition_states(frame, state_length = 0.5, wrap = FALSE) +
-  labs(title = "Wave {closest_state}") +
-  theme_void()
