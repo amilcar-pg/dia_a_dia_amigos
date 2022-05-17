@@ -138,7 +138,7 @@ p <- ggplot() +
   scale_alpha_manual(values = c(0, 1))
 
 # funciona certo, mas não é fluido
-p +
+anim <- p +
   labs(title = "Hora: {stringr::str_sub(closest_state, 12, 16)}") +
   transition_states(frame_time, state_length = 0) +
   theme_void()
@@ -155,9 +155,14 @@ p +
   transition_time(frame) +
   theme_void()
 
-# animate(
-#   plot = anim,
-#   nframes = 8 * 96,
-#   #render = av_renderer("previa_especial.mp4")
-#   #render = gifski_renderer("previa_especial.gif")
-#   )
+animate(
+  plot = anim,
+  nframes = 8 * 96,
+  render = av_renderer("previa_especial.mp4")
+  #render = gifski_renderer("previa_especial.gif")
+  )
+
+# exportando exemplo para coneguir ajuda ----------------------------------
+
+readr::write_csv(edges_df, "output/edges_df.csv")
+readr::write_csv(nodes_df, "output/nodes_df.csv")
