@@ -4,6 +4,8 @@ df_raw <- googlesheets4::read_sheet(
   "https://docs.google.com/spreadsheets/d/1Dx9Za-b1hqeiKso1E067M1BgF6VhdbGyz9FZJC662Sk/edit#gid=2051768494"
   )[,-2]
 
+# df_raw <- readr::read_csv("output/df_raw.csv")
+
 atividades <- colnames(df_raw)[23:32]
 
 # inseri uma coluna com cada uma das opções para garantir que todos os nós estarão

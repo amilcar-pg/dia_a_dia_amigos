@@ -37,13 +37,25 @@ for (i in 1:length(hourly_list)){
 
 set.seed(123)
 
-xy <- layout_as_dynamic(igraph_list, alpha = 0.2)
+xy <- list()
+
+for (i in 1:length(igraph_list)){
+xy[[i]] <- igraph::layout_in_circle(igraph_list[[i]])
+}
 
 for (i in 1:length(xy)){
   names(xy)[i] <- names(hourly_list)[i]
 }
 
-## plotando os gráficos
+## recuperando metricas
+
+for (i in 1:length(igraph_list)){
+igraph::V(igraph_list[[i]])$degree <- igraph::degree(igraph_list[[i]], mode = c("All"))
+}
+
+## plotando os graficos individualmente
+## esta etapa nao e necessaria, mas e interessante para se ter uma ideia de
+## como a visualizacao esta organizada.
 
 pList <- list()
 
@@ -125,44 +137,44 @@ nodes_df <- dplyr::left_join(nodes_df, df_time, by = "frame")
 
 # plotando ----------------------------------------------------------------
 
-p <- ggplot() +
+p1 <- ggplot() +
   geom_segment(
     data = edges_df,
     aes(x = x, xend = xend, y = y, yend = yend, group = id, alpha = status), 
     show.legend = FALSE
   ) +
   geom_point(
-    data = nodes_df, aes(x, y, group = name, fill = as.factor(atividade)),
-    shape = 21, size = 6, show.legend = FALSE
+    data = nodes_df, aes(x, y, group = name, fill = as.factor(atividade),
+    size = ifelse(atividade == TRUE, degree, 10*degree)),
+    shape = 21, show.legend = FALSE  
   ) +
+  ggrepel::geom_text_repel(data = nodes_df,
+                            aes(x, y, label = ifelse(atividade == TRUE, name, NA)),
+                            min.segment.length = Inf) +
   scale_alpha_manual(values = c(0, 1))
 
-# funciona certo, mas não é fluido
-anim <- p +
+# funciona certo, mas não consegui fazer o tempo passar por minuto
+anim <- p1 +
   labs(title = "Hora: {stringr::str_sub(closest_state, 12, 16)}") +
-  transition_states(frame_time, state_length = 0) +
-  theme_void()
+  transition_states(frame_time,
+                    transition_length = 0.1,
+                    state_length = 0) +
+  theme_void() +
+  theme(plot.margin = margin(30, 30, 30, 30),
+        plot.title = element_text(size = 20, hjust = 0.5, margin = margin(10, 10, 10, 10),))
 
-# Começa do frame errado
-p +
-  labs(title = labs(title = 'Hora: {stringr::str_sub(frame_time, 12, 16)}')) +
-  transition_time(frame_time) +
-  theme_void()
-
-# Funciona certo, mas não consigo recuperar a label certa para o título
-p +
-  labs(title = labs(title = 'Hora: {frame_time}')) +
-  transition_time(frame) +
-  theme_void()
+anim
 
 animate(
   plot = anim,
   nframes = 8 * 96,
-  render = av_renderer("previa_especial.mp4")
-  #render = gifski_renderer("previa_especial.gif")
-  )
+  duration = 48,
+  start_pause = 10, end_pause = 10,
+  render = av_renderer("previa_especial.mp4"),
+  # render = gifski_renderer("previa_especial.gif")
+)
 
 # exportando exemplo para coneguir ajuda ----------------------------------
 
-readr::write_csv(edges_df, "output/edges_df.csv")
-readr::write_csv(nodes_df, "output/nodes_df.csv")
+# readr::write_csv(edges_df, "output/edges_df.csv")
+# readr::write_csv(nodes_df, "output/nodes_df.csv")
