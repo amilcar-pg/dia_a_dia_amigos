@@ -157,13 +157,11 @@ p1 <- ggplot() +
 anim <- p1 +
   labs(title = "Hora: {stringr::str_sub(closest_state, 12, 16)}") +
   transition_states(frame_time,
-                    transition_length = 0.1,
+                    transition_length = 0.05,
                     state_length = 0) +
   theme_void() +
   theme(plot.margin = margin(30, 30, 30, 30),
         plot.title = element_text(size = 20, hjust = 0.5, margin = margin(10, 10, 10, 10),))
-
-anim
 
 animate(
   plot = anim,
@@ -171,7 +169,7 @@ animate(
   duration = 48,
   start_pause = 10, end_pause = 10,
   # render = av_renderer("previa_especial.mp4"),
-  render = gifski_renderer("previa_especial.gif")
+  # render = gifski_renderer("previa_especial.gif")
 )
 
 # exportando exemplo para coneguir ajuda ----------------------------------
