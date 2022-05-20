@@ -22,7 +22,6 @@ p <- ggplot() +
   ) +
   scale_alpha_manual(values = c(0, 1))
 
-
 # animando ----------------------------------------------------------------
 
 # o título aparece o horário errado.
@@ -35,4 +34,8 @@ p +
 p +
   labs(title = labs(title = 'Hora: {frame_time}')) +
   transition_time(frame) +
+
+p +
+  labs(title = labs(title = 'Hora: {stringr::str_sub(frame_time, 12, 16)}')) +
+  transition_time(frame_time) +
   theme_void()
