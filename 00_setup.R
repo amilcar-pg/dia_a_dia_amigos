@@ -6,6 +6,9 @@
 
 # criando pastas ----------------------------------------------------------
 
+# para armazenar os estudos
+fs::dir_create("estudos")
+
 # para inserir os dados
 fs::dir_create("data")
 
