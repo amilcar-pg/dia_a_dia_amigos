@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Dia-a-dia de um amigo do Amilcar</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Amilcar L. do Prado G. Gramacho" />
+    <script src="libs/header-attrs-2.14/header-attrs.js"></script>
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <link rel="stylesheet" href="custom.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Dia-a-dia de um amigo do Amilcar
+]
+.subtitle[
+## Uma análise <s>in</s>útil sobre o amigo médio do Amilcar
+]
+.author[
+### Amilcar L. do Prado G. Gramacho
+]
+.institute[
+### curso-R: Curso de visualização de Dados
+]
+.date[
+### 27/05/2022 (Atualizado: 2022-05-23)
+]
+
+---
+
+
+# Introdução
+
+## Olá! Eu sou o Amilcar!
+
+Finalizei o curso de visualização de dados da curso-R e montei esta apresentação como parte do trabalho final.
+
+Ao invés de utilizar a base de dados proposta pelo curso, optei por coletar dados sobre o dia-a-dia de alguns de meus amigos, por trazer um tom talvez um pouco mais cômico ao contexto.
+
+--
+
+## Sobre o projeto
+
+Inicialmente, acreditei que conseguiria replicar o gráfico ["A Day in the Life of Americans"](https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/), mas depois de duas semanas de pesquisas intensas, acabei desistindo para conseguir pelo menos apresentar algum tipo de gráfico neste trabalho e concorrer à bolsa proposta.
+
+Sendo assim, a apresentação descreverá um pouco do dia-a-dia de um amigo médio do Amilcar (também conhecidos como meus amigos), e concluirá com o mais próximo que eu consegui chegar do gráfico que me motivou.
+---
+# Metodologia
+
+## Coleta
+Foi criada uma [planilha do google sheets](https://docs.google.com/spreadsheets/d/1Dx9Za-b1hqeiKso1E067M1BgF6VhdbGyz9FZJC662Sk/edit#gid=2051768494), onde as atividades foram previamente selecionadas por mim, para evitar a necessidade de um trabalho extensivo de limpeza de dados.
+
+Ciente do quão intrometido eu já estava sendo ao pedir para meus amigos que me informassem o que faziam a cada parte do seu dia, optei por manter o intervalo de 15 minutos entre uma atividade e outra, por acreditar que já seria o suficiente para alcançar meu objetivo;
+
+--
+
+## Análise
+
+Uma vez com os dados na mão, me debrucei sobre o desafio de recriar o gráfico mencionado anteriormente e após falhar miseravelmente percebi que precisava fazer algo mais para entregar como trabalho final. Sendo assim, para manter as amizades e evitar irritá-las mais ainda pedindo para preencher outra planilha ou formulário, optei por tentar extrair o máximo de informações possíveis do que já havia coletado.
+
+---
+class: inverse, center, middle
+
+# Uma análise geral...
+
+---
+
+# O tempo gasto em cada atividade
+
+COLOCAR UM BOXPLOT SEPARADO POR ATIVIDADE
+
+---
+
+# O tempo gasto em cada atividade
+
+COLOCAR GRÁFICO DE BARRAS COM A SOMA DOS TEMPOS E UM ÍCONE REPRESENTADO CADA UM
+
+---
+
+class: inverse, center, middle
+
+# Analisando o sono dos amigos
+
+---
+
+# Quanto eles dormem?
+
+INSERIR INFORMAÇÕES:
+
+* Média de tempo;
+* Média de hora de ir dormir;
+* Média de hora de acordar
+
+---
+
+# Mais horas de sono implicam em algo?
+
+RODAR REGRESSÕES PARA ENCONTRAR ALGUMA VARIÁVEL RELEVANTE
+
+---
+
+# Mais horas de sono implicam em algo?
+
+PLOTAR GRÁFICO DE DISPERSÃO COM RETA DE TENDÊNCIA, FACETS PARA ATIVIDADES
+
+---
+
+class: inverse, center, middle
+
+# E afinal... Como é o dia deles?
+
+---
+# Uma análise breve de migração...
+
+PLOTAR SANKEY SEPARADO DE 6 EM 6 HORAS, COM AS ATIVIDADES MAIS COMUNS
+
+---
+
+class: inverse, center, middle
+
+# E agora...
+
+---
+class: inverse, center, middle
+
+# O tão esperado momento...
+
+---
+class: inverse, center, middle
+
+# Finalmente
+
+---
+class: inverse, center, middle
+
+# Chegou!
+
+---
+
+class: inverse, center, middle
+
+## Acompanhe a seguir como se comporta um amigo médio do Amilcar em seu dia...
+
+---
+
+# Mentira!
+
+Antes precisamos explicar o gráfico...
+
+--
+
+* A hora na parte de cima representa a hora do dia
+
+--
+
+* Cada ponto vermelho representa um amigo do Amilcar
+
+--
+
+* Cada ponto azul representa uma atividade que o amigo do Amilcar pode ou não estar fazendo
+  * No momento da hora apresentada no título
+
+--
+
+* Se o amigo estiver realizando a atividade, haverá uma ligação entre ele e a atividade
+
+--
+
+* Para facilitar a visualização de qual atividade está com mais pessoas naquele determinado horário, o tamanho da bolinha que representa a atividade é influenciado pela quantidade de ligações que possuem.
+
+---
+class: inverse, center, middle
+
+# Agora sim!
+
+---
+class: clear, center
+
+![](output/dia_a_dia.gif)&lt;!-- --&gt;
+
+---
+
+class: inverse, center, middle
+
+# Muito obrigado!
+
+Slides criados com o pacote [**xaringan**](https://github.com/yihui/xaringan).
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -168,8 +168,8 @@ animate(
   nframes = 8 * 96,
   duration = 48,
   start_pause = 10, end_pause = 10,
-  # render = av_renderer("previa_especial.mp4"),
-  # render = gifski_renderer("previa_especial.gif")
+  # render = av_renderer("output/dia_a_dia.mp4"),
+  render = gifski_renderer("output/dia_a_dia.gif")
 )
 
 # exportando exemplo para coneguir ajuda ----------------------------------
