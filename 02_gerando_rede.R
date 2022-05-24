@@ -1,6 +1,6 @@
 # importando dados --------------------------------------------------------
 
-source("01_importando_dados.R")
+source("01_importando_dados_redes.R")
 
 # gerando rede ------------------------------------------------------------
 
