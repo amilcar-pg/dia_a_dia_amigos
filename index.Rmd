@@ -12,7 +12,16 @@ output:
       highlightStyle: github
       highlightLines: true
       countIncrementalSlides: false
+
 ---
+
+```{r importando_dados_pacotes, include=FALSE}
+
+source("03_importando_dados.R")
+
+library(ggplot2)
+
+```
 
 # Introdução
 
@@ -26,7 +35,7 @@ Ao invés de utilizar a base de dados proposta pelo curso, optei por coletar dad
 
 ## Sobre o projeto
 
-Inicialmente, acreditei que conseguiria replicar o gráfico ["A Day in the Life of Americans"](https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/), mas depois de duas semanas de pesquisas intensas, acabei desistindo para conseguir pelo menos apresentar algum tipo de gráfico neste trabalho e concorrer à bolsa proposta.
+Inicialmente, acreditei que conseguiria replicar o gráfico ["A Day in the Life of Americans"](https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/), mas depois de duas semanas de pesquisas intensas, precisei me adaptar à realidade do R sem o D3 para conseguir pelo menos apresentar algum tipo de gráfico neste trabalho e concorrer à bolsa proposta.
 
 Sendo assim, a apresentação descreverá um pouco do dia-a-dia de um amigo médio do Amilcar (também conhecidos como meus amigos), e concluirá com o mais próximo que eu consegui chegar do gráfico que me motivou.
 ---
@@ -41,7 +50,7 @@ Ciente do quão intrometido eu já estava sendo ao pedir para meus amigos que me
 
 ## Análise
 
-Uma vez com os dados na mão, me debrucei sobre o desafio de recriar o gráfico mencionado anteriormente e após falhar miseravelmente percebi que precisava fazer algo mais para entregar como trabalho final. Sendo assim, para manter as amizades e evitar irritá-las mais ainda pedindo para preencher outra planilha ou formulário, optei por tentar extrair o máximo de informações possíveis do que já havia coletado.
+Uma vez com os dados na mão, me debrucei sobre o desafio de recriar o gráfico mencionado anteriormente e após falhar miseravelmente percebi que precisava fazer algo mais para entregar como trabalho final. Sendo assim, para manter as amizades e poupá-las de preencher outra planilha ou formulário, optei por tentar extrair o máximo de informações possíveis do que já havia coletado.
 
 ---
 class: inverse, center, middle
@@ -52,13 +61,79 @@ class: inverse, center, middle
 
 # O tempo gasto em cada atividade
 
-COLOCAR UM BOXPLOT SEPARADO POR ATIVIDADE
+.center[
+```{r echo=FALSE}
+df_boxplot <- df_people |> 
+  tidyr::pivot_longer(-c(amigo),
+                      names_to = "atividade",
+                      values_to = "tempo")
+
+df_boxplot |> 
+  ggplot(aes(x = atividade, y = tempo, fill = atividade)) +
+  geom_boxplot() +
+  labs(title = "Distribuição do tempo gasto em cada atividade",
+    x = NULL, y = "Unidades de tempo", fill = NULL,
+    caption = "1 unidade de tempo corresponde a 15 minutos") +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5,
+                                  size = 16),
+        panel.background = element_rect(fill = "#FAFAFA"),
+        plot.background = element_rect(fill = "#FAFAFA"),
+        panel.grid.major = element_line(colour = "gray70"))
+```
+]
 
 ---
 
 # O tempo gasto em cada atividade
 
-COLOCAR GRÁFICO DE BARRAS COM A SOMA DOS TEMPOS E UM ÍCONE REPRESENTADO CADA UM
+.center[
+```{r echo=FALSE}
+ggplot(df_activities) +
+  aes(x = value, y = n, fill = value) +
+  geom_col() +
+  scale_fill_hue(direction = 1) +
+  labs(
+    x = NULL,
+    y = "Unidades de tempo",
+    title = "Soma do tempo gasto por atividade",
+    caption = "1 unidade de tempo corresponde a 15 minutos"
+  ) +
+  theme(legend.position = "none",
+        axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5,
+                                  size = 16),
+        panel.background = element_rect(fill = "#FAFAFA"),
+        plot.background = element_rect(fill = "#FAFAFA"),
+        panel.grid.major = element_line(colour = "gray70")) +
+  geom_text(aes(label = hora),
+            vjust = -1)
+```
+]
+---
+# Há relação entre as atividades?
+
+```{r echo=FALSE, fig.align='center'}
+corplot <- ggplot(melted_cormat, aes(Atividade1, Atividade2, fill = value))+
+  geom_tile(color = "white")+
+  scale_fill_distiller(palette = "Oranges", direction = 1) +
+  labs(title = "Correlação entre as atividades",
+       x = NULL, y = NULL) +
+  theme(legend.position = "none",
+    axis.text.x = element_text(angle = 90),
+        plot.title = element_text(hjust = 0.5,
+                                  size = 16),
+        panel.background = element_rect(fill = "#FAFAFA"),
+        plot.background = element_rect(fill = "#FAFAFA"),
+        panel.grid.major = element_line(colour = "gray70"))
+
+shiny::div(
+plotly::ggplotly(corplot,
+                 width = 550,
+                 height = 550),
+align = "center")
+```
 
 ---
 
@@ -78,34 +153,45 @@ INSERIR INFORMAÇÕES:
 
 ---
 
-# Mais horas de sono implicam em algo?
+class: inverse, center, middle
 
-RODAR REGRESSÕES PARA ENCONTRAR ALGUMA VARIÁVEL RELEVANTE
-
----
-
-# Mais horas de sono implicam em algo?
-
-PLOTAR GRÁFICO DE DISPERSÃO COM RETA DE TENDÊNCIA, FACETS PARA ATIVIDADES
+# E no final das contas...
 
 ---
 
 class: inverse, center, middle
 
-# E afinal... Como é o dia deles?
+# Mais horas de sono implicam em algo? 
 
 ---
-# Uma análise breve de migração...
 
-PLOTAR SANKEY SEPARADO DE 6 EM 6 HORAS, COM AS ATIVIDADES MAIS COMUNS
+# Mais horas de sono implicam em algo?
 
+.center[
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+df_reg |> 
+  ggplot(aes(y = Dormindo, x = tempo, color = atividade)) +
+  geom_point() +
+  geom_smooth(method = "lm") +
+  facet_wrap(vars(atividade)) +
+  labs(title = "Relação entre o tempo gasto dormindo e as outras atividades",
+       x = NULL, y = NULL) +
+  theme(legend.position = "none",
+        plot.title = element_text(hjust = 0.5,
+                                  size = 16),
+        panel.background = element_rect(fill = "#FAFAFA"),
+        plot.background = element_rect(fill = "#FAFAFA"),
+        panel.grid.major = element_line(colour = "gray70"))
+```
+]
 ---
 
 class: inverse, center, middle
 
-# E agora...
+# Mas e aí?!?! Como é o dia deles?
 
 ---
+
 class: inverse, center, middle
 
 # O tão esperado momento...
@@ -129,6 +215,8 @@ class: inverse, center, middle
 ---
 
 # Mentira!
+
+--
 
 Antes precisamos explicar o gráfico...
 
@@ -170,5 +258,9 @@ knitr::include_graphics("output/dia_a_dia.gif")
 class: inverse, center, middle
 
 # Muito obrigado!
+
+
+Amilcar L. do Prado G. Gramacho
+
 
 Slides criados com o pacote [*xaringan*](https://github.com/yihui/xaringan).

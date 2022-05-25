@@ -7,6 +7,14 @@
     <script src="libs/header-attrs-2.14/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/metropolis-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
+    <script src="libs/plotly-binding-4.10.0/plotly.js"></script>
+    <script src="libs/typedarray-0.1/typedarray.min.js"></script>
+    <script src="libs/jquery-3.5.1/jquery.min.js"></script>
+    <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
+    <link href="libs/plotly-htmlwidgets-css-2.5.1/plotly-htmlwidgets.css" rel="stylesheet" />
+    <script src="libs/plotly-main-2.5.1/plotly-latest.min.js"></script>
     <link rel="stylesheet" href="custom.css" type="text/css" />
   </head>
   <body>
@@ -26,10 +34,12 @@ class: center, middle, inverse, title-slide
 ### curso-R: Curso de visualização de Dados
 ]
 .date[
-### 27/05/2022 (Atualizado: 2022-05-23)
+### 27/05/2022 (Atualizado: 2022-05-25)
 ]
 
 ---
+
+
 
 
 # Introdução
@@ -44,7 +54,7 @@ Ao invés de utilizar a base de dados proposta pelo curso, optei por coletar dad
 
 ## Sobre o projeto
 
-Inicialmente, acreditei que conseguiria replicar o gráfico ["A Day in the Life of Americans"](https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/), mas depois de duas semanas de pesquisas intensas, acabei desistindo para conseguir pelo menos apresentar algum tipo de gráfico neste trabalho e concorrer à bolsa proposta.
+Inicialmente, acreditei que conseguiria replicar o gráfico ["A Day in the Life of Americans"](https://flowingdata.com/2015/12/15/a-day-in-the-life-of-americans/), mas depois de duas semanas de pesquisas intensas, precisei me adaptar à realidade do R sem o D3 para conseguir pelo menos apresentar algum tipo de gráfico neste trabalho e concorrer à bolsa proposta.
 
 Sendo assim, a apresentação descreverá um pouco do dia-a-dia de um amigo médio do Amilcar (também conhecidos como meus amigos), e concluirá com o mais próximo que eu consegui chegar do gráfico que me motivou.
 ---
@@ -53,13 +63,13 @@ Sendo assim, a apresentação descreverá um pouco do dia-a-dia de um amigo méd
 ## Coleta
 Foi criada uma [planilha do google sheets](https://docs.google.com/spreadsheets/d/1Dx9Za-b1hqeiKso1E067M1BgF6VhdbGyz9FZJC662Sk/edit#gid=2051768494), onde as atividades foram previamente selecionadas por mim, para evitar a necessidade de um trabalho extensivo de limpeza de dados.
 
-Ciente do quão intrometido eu já estava sendo ao pedir para meus amigos que me informassem o que faziam a cada parte do seu dia, optei por manter o intervalo de 15 minutos entre uma atividade e outra, por acreditar que já seria o suficiente para alcançar meu objetivo;
+Ciente do quão intrometido eu já estava sendo ao pedir para meus amigos que me informassem o que faziam a cada parte do seu dia, optei por manter o intervalo de 15 minutos entre uma atividade e outra, por acreditar que já seria o suficiente para alcançar meu objetivo.
 
 --
 
 ## Análise
 
-Uma vez com os dados na mão, me debrucei sobre o desafio de recriar o gráfico mencionado anteriormente e após falhar miseravelmente percebi que precisava fazer algo mais para entregar como trabalho final. Sendo assim, para manter as amizades e evitar irritá-las mais ainda pedindo para preencher outra planilha ou formulário, optei por tentar extrair o máximo de informações possíveis do que já havia coletado.
+Uma vez com os dados na mão, me debrucei sobre o desafio de recriar o gráfico mencionado anteriormente e após falhar miseravelmente percebi que precisava fazer algo mais para entregar como trabalho final. Sendo assim, para manter as amizades e poupá-las de preencher outra planilha ou formulário, optei por tentar extrair o máximo de informações possíveis do que já havia coletado.
 
 ---
 class: inverse, center, middle
@@ -70,13 +80,24 @@ class: inverse, center, middle
 
 # O tempo gasto em cada atividade
 
-COLOCAR UM BOXPLOT SEPARADO POR ATIVIDADE
+.center[
+![](index_files/figure-html/unnamed-chunk-1-1.png)&lt;!-- --&gt;
+]
 
 ---
 
 # O tempo gasto em cada atividade
 
-COLOCAR GRÁFICO DE BARRAS COM A SOMA DOS TEMPOS E UM ÍCONE REPRESENTADO CADA UM
+.center[
+![](index_files/figure-html/unnamed-chunk-2-1.png)&lt;!-- --&gt;
+]
+---
+# Há relação entre as atividades?
+
+<div align="center">
+<div id="htmlwidget-54c095f794749026b276" style="width:550px;height:550px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-54c095f794749026b276">{"x":{"data":[{"x":[1,2,3,4,5,6,7,8,9,10],"y":[1,2,3,4,5,6,7,8,9,10],"z":[[1,0.332136452177746,0.415938658473733,0.312930018245754,0.606706217659848,0.374371615970933,0.493680746941453,0.51416946462832,0.37748958901102,0.215404322569772],[null,1,0.626239480528872,0.23777578452423,0.421163141469235,0.400596680895412,0.171736040631402,0.605937243414512,0.245235108225138,0.527454795987705],[null,null,1,0.185001445971898,0.390620122345868,0.476385410301811,0.353435969447487,0.469122257980956,0.461640236544157,0.317520767746151],[null,null,null,1,0.416191596111266,0.577516744755076,0.39932463166147,0.358884032756706,0.424447883640573,0.350412183419167],[null,null,null,null,1,0.191790232012694,0.46220026204975,0.433112084522582,0.316316415061227,0.327568265411186],[null,null,null,null,null,1,0.334585361883129,0.34283648145642,0.464305703803797,0.272107484950963],[null,null,null,null,null,null,1,0.48867477547029,0.425391306194738,0],[null,null,null,null,null,null,null,1,0.23932920972054,0.291933214853351],[null,null,null,null,null,null,null,null,1,0.260372136765727],[null,null,null,null,null,null,null,null,null,1]],"text":[["Atividade1: Afazeres domésticos<br />Atividade2: Afazeres domésticos<br />value:  1.000000000","Atividade1: Atividades físicas<br />Atividade2: Afazeres domésticos<br />value: -0.147551098","Atividade1: Comendo<br />Atividade2: Afazeres domésticos<br />value: -0.003558640","Atividade1: Descansando<br />Atividade2: Afazeres domésticos<br />value: -0.180552397","Atividade1: Deslocando<br />Atividade2: Afazeres domésticos<br />value:  0.324226164","Atividade1: Dormindo<br />Atividade2: Afazeres domésticos<br />value: -0.074980872","Atividade1: Estudando<br />Atividade2: Afazeres domésticos<br />value:  0.130021070","Atividade1: Higiene pessoal<br />Atividade2: Afazeres domésticos<br />value:  0.165225642","Atividade1: Lazer<br />Atividade2: Afazeres domésticos<br />value: -0.069623440","Atividade1: Trabalhando<br />Atividade2: Afazeres domésticos<br />value: -0.348125128"],[null,"Atividade1: Atividades físicas<br />Atividade2: Atividades físicas<br />value:  1.000000000","Atividade1: Comendo<br />Atividade2: Atividades físicas<br />value:  0.357789034","Atividade1: Descansando<br />Atividade2: Atividades físicas<br />value: -0.309685546","Atividade1: Deslocando<br />Atividade2: Atividades físicas<br />value:  0.005418285","Atividade1: Dormindo<br />Atividade2: Atividades físicas<br />value: -0.029919868","Atividade1: Estudando<br />Atividade2: Atividades físicas<br />value: -0.423157798","Atividade1: Higiene pessoal<br />Atividade2: Atividades físicas<br />value:  0.322904880","Atividade1: Lazer<br />Atividade2: Atividades físicas<br />value: -0.296868624","Atividade1: Trabalhando<br />Atividade2: Atividades físicas<br />value:  0.188053054"],[null,null,"Atividade1: Comendo<br />Atividade2: Comendo<br />value:  1.000000000","Atividade1: Descansando<br />Atividade2: Comendo<br />value: -0.400364623","Atividade1: Deslocando<br />Atividade2: Comendo<br />value: -0.047062008","Atividade1: Dormindo<br />Atividade2: Comendo<br />value:  0.100303499","Atividade1: Estudando<br />Atividade2: Comendo<br />value: -0.110953376","Atividade1: Higiene pessoal<br />Atividade2: Comendo<br />value:  0.087823646","Atividade1: Lazer<br />Atividade2: Comendo<br />value:  0.074967724","Atividade1: Trabalhando<br />Atividade2: Comendo<br />value: -0.172664379"],[null,null,null,"Atividade1: Descansando<br />Atividade2: Descansando<br />value:  1.000000000","Atividade1: Deslocando<br />Atividade2: Descansando<br />value: -0.003124032","Atividade1: Dormindo<br />Atividade2: Descansando<br />value:  0.274071590","Atividade1: Estudando<br />Atividade2: Descansando<br />value: -0.032105556","Atividade1: Higiene pessoal<br />Atividade2: Descansando<br />value: -0.101592286","Atividade1: Lazer<br />Atividade2: Descansando<br />value:  0.011062267","Atividade1: Trabalhando<br />Atividade2: Descansando<br />value: -0.116148972"],[null,null,null,null,"Atividade1: Deslocando<br />Atividade2: Deslocando<br />value:  1.000000000","Atividade1: Dormindo<br />Atividade2: Deslocando<br />value: -0.388699847","Atividade1: Estudando<br />Atividade2: Deslocando<br />value:  0.075929983","Atividade1: Higiene pessoal<br />Atividade2: Deslocando<br />value:  0.025949459","Atividade1: Lazer<br />Atividade2: Deslocando<br />value: -0.174733748","Atividade1: Trabalhando<br />Atividade2: Deslocando<br />value: -0.155400348"],[null,null,null,null,null,"Atividade1: Dormindo<br />Atividade2: Dormindo<br />value:  1.000000000","Atividade1: Estudando<br />Atividade2: Dormindo<br />value: -0.143343279","Atividade1: Higiene pessoal<br />Atividade2: Dormindo<br />value: -0.129165860","Atividade1: Lazer<br />Atividade2: Dormindo<br />value:  0.079547641","Atividade1: Trabalhando<br />Atividade2: Dormindo<br />value: -0.250695382"],[null,null,null,null,null,null,"Atividade1: Estudando<br />Atividade2: Estudando<br />value:  1.000000000","Atividade1: Higiene pessoal<br />Atividade2: Estudando<br />value:  0.121419600","Atividade1: Lazer<br />Atividade2: Estudando<br />value:  0.012683295","Atividade1: Trabalhando<br />Atividade2: Estudando<br />value: -0.718241850"],[null,null,null,null,null,null,null,"Atividade1: Higiene pessoal<br />Atividade2: Higiene pessoal<br />value:  1.000000000","Atividade1: Lazer<br />Atividade2: Higiene pessoal<br />value: -0.307016386","Atividade1: Trabalhando<br />Atividade2: Higiene pessoal<br />value: -0.216629983"],[null,null,null,null,null,null,null,null,"Atividade1: Lazer<br />Atividade2: Lazer<br />value:  1.000000000","Atividade1: Trabalhando<br />Atividade2: Lazer<br />value: -0.270859548"],[null,null,null,null,null,null,null,null,null,"Atividade1: Trabalhando<br />Atividade2: Trabalhando<br />value:  1.000000000"]],"colorscale":[[0,"#FEEDDE"],[0.171736040631402,"#FDCFA0"],[0.185001445971898,"#FDCC9C"],[0.191790232012694,"#FDCB9A"],[0.215404322569772,"#FEC692"],[0.23777578452423,"#FEC28A"],[0.23932920972054,"#FEC18A"],[0.245235108225138,"#FEC088"],[0.260372136765727,"#FEBD83"],[0.272107484950963,"#FEBB7F"],[0.291933214853351,"#FEB679"],[0.312930018245754,"#FDB272"],[0.316316415061227,"#FDB171"],[0.317520767746151,"#FDB170"],[0.327568265411186,"#FDAF6D"],[0.332136452177746,"#FDAE6B"],[0.334585361883129,"#FDAE6B"],[0.34283648145642,"#FDAC68"],[0.350412183419167,"#FDAB66"],[0.353435969447487,"#FDAA65"],[0.358884032756706,"#FDA964"],[0.374371615970933,"#FDA660"],[0.37748958901102,"#FDA55F"],[0.390620122345868,"#FEA35B"],[0.39932463166147,"#FEA159"],[0.400596680895412,"#FEA158"],[0.415938658473733,"#FE9E54"],[0.416191596111266,"#FE9E54"],[0.421163141469235,"#FE9D53"],[0.424447883640573,"#FE9C52"],[0.425391306194738,"#FE9C51"],[0.433112084522582,"#FE9A4F"],[0.461640236544157,"#FD9547"],[0.46220026204975,"#FD9547"],[0.464305703803797,"#FD9446"],[0.469122257980956,"#FD9345"],[0.476385410301811,"#FD9243"],[0.48867477547029,"#FD8F3F"],[0.493680746941453,"#FD8E3E"],[0.51416946462832,"#FC8A39"],[0.527454795987705,"#FB8736"],[0.577516744755076,"#F87D2B"],[0.605937243414512,"#F67624"],[0.606706217659848,"#F67624"],[0.626239480528872,"#F4721F"],[1,"#8C2D04"]],"type":"heatmap","showscale":false,"autocolorscale":false,"showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":44.5595682855957,"r":7.30593607305936,"b":122.009132420091,"l":122.009132420091},"plot_bgcolor":"rgba(250,250,250,1)","paper_bgcolor":"rgba(250,250,250,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Correlação entre as atividades","font":{"color":"rgba(0,0,0,1)","family":"","size":21.2536322125363},"x":0.5,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,10.6],"tickmode":"array","ticktext":["Afazeres domésticos","Atividades físicas","Comendo","Descansando","Deslocando","Dormindo","Estudando","Higiene pessoal","Lazer","Trabalhando"],"tickvals":[1,2,3,4,5,6,7,8,9,10],"categoryorder":"array","categoryarray":["Afazeres domésticos","Atividades físicas","Comendo","Descansando","Deslocando","Dormindo","Estudando","Higiene pessoal","Lazer","Trabalhando"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-90,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(179,179,179,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.4,10.6],"tickmode":"array","ticktext":["Afazeres domésticos","Atividades físicas","Comendo","Descansando","Deslocando","Dormindo","Estudando","Higiene pessoal","Lazer","Trabalhando"],"tickvals":[1,2,3,4,5,6,7,8,9,10],"categoryorder":"array","categoryarray":["Afazeres domésticos","Atividades físicas","Comendo","Descansando","Deslocando","Dormindo","Estudando","Higiene pessoal","Lazer","Trabalhando"],"nticks":null,"ticks":"outside","tickcolor":"rgba(51,51,51,1)","ticklen":3.65296803652968,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(179,179,179,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"rgba(255,255,255,1)","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","width":550,"height":550,"barmode":"relative"},"config":{"doubleClick":"reset","modeBarButtonsToAdd":["hoverclosest","hovercompare"],"showSendToCloud":false},"source":"A","attrs":{"34a819e45007":{"x":{},"y":{},"fill":{},"type":"heatmap"}},"cur_data":"34a819e45007","visdat":{"34a819e45007":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
 
 ---
 
@@ -96,34 +117,31 @@ INSERIR INFORMAÇÕES:
 
 ---
 
-# Mais horas de sono implicam em algo?
+class: inverse, center, middle
 
-RODAR REGRESSÕES PARA ENCONTRAR ALGUMA VARIÁVEL RELEVANTE
-
----
-
-# Mais horas de sono implicam em algo?
-
-PLOTAR GRÁFICO DE DISPERSÃO COM RETA DE TENDÊNCIA, FACETS PARA ATIVIDADES
+# E no final das contas...
 
 ---
 
 class: inverse, center, middle
 
-# E afinal... Como é o dia deles?
+# Mais horas de sono implicam em algo? 
 
 ---
-# Uma análise breve de migração...
 
-PLOTAR SANKEY SEPARADO DE 6 EM 6 HORAS, COM AS ATIVIDADES MAIS COMUNS
+# Mais horas de sono implicam em algo?
 
+.center[
+![](index_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+]
 ---
 
 class: inverse, center, middle
 
-# E agora...
+# Mas e aí?!?! Como é o dia deles?
 
 ---
+
 class: inverse, center, middle
 
 # O tão esperado momento...
@@ -147,6 +165,8 @@ class: inverse, center, middle
 ---
 
 # Mentira!
+
+--
 
 Antes precisamos explicar o gráfico...
 
@@ -187,7 +207,11 @@ class: inverse, center, middle
 
 # Muito obrigado!
 
-Slides criados com o pacote [**xaringan**](https://github.com/yihui/xaringan).
+
+Amilcar L. do Prado G. Gramacho
+
+
+Slides criados com o pacote [*xaringan*](https://github.com/yihui/xaringan).
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
