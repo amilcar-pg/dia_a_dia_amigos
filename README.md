@@ -12,6 +12,8 @@ Sendo assim, o objetivo final é gerar uma apresentação em Markdown com uma an
 
 Quero agradecer a todos e todas que se dispuseram a preencher a planilha que usei como fonte de dados para este projeto. Sei que foi um pedido invasivo, e por isso tenho certeza de que cada pessoa que preencheu me considera em algum nível, por isso sei que a denominação de análise de "Amigos" não é errônea.
 
+Agradeço também ao IBPAD por me apoiar na realização deste curso!.
+
 <br/><br/>
 
 ## O projeto

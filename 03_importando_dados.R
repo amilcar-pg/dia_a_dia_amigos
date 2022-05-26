@@ -51,3 +51,22 @@ colnames(melted_cormat) <- c("Atividade1", "Atividade2", "value")
 
 df_reg <- df_people |> 
   tidyr::pivot_longer(cols = -c(amigo, Dormindo), names_to = "atividade", values_to = "tempo")
+
+# para a tabela ----
+
+df_tabela <- tibble::tibble(`Média de tempo de sono` = NA)
+
+df_tabela <- df_tabela |> 
+  dplyr::mutate(
+    `Média de tempo de sono` = "8:00",
+    `Média de hora de ir dormir` = "23:15",
+    `Média de hora de acordar`= "7:15"
+  )
+
+# imagens para o gráfico de barras ----
+
+df_activities <- df_activities |> 
+  dplyr::mutate(
+    img = 
+    stringr::str_c(stringr::str_c(here::here("data"), value, sep = "/"), ".png")
+  )

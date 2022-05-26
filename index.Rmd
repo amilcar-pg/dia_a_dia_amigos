@@ -50,7 +50,7 @@ Ciente do quão intrometido eu já estava sendo ao pedir para meus amigos que me
 
 ## Análise
 
-Uma vez com os dados na mão, me debrucei sobre o desafio de recriar o gráfico mencionado anteriormente e após falhar miseravelmente percebi que precisava fazer algo mais para entregar como trabalho final. Sendo assim, para manter as amizades e poupá-las de preencher outra planilha ou formulário, optei por tentar extrair o máximo de informações possíveis do que já havia coletado.
+Uma vez com os dados em mãos, me debrucei sobre o desafio de recriar o gráfico mencionado anteriormente e após falhar miseravelmente percebi que precisava fazer algo mais para entregar como trabalho final. Sendo assim, para manter as amizades e poupá-las de preencher outra planilha ou formulário, optei por tentar extrair o máximo de informações possíveis do que já havia coletado.
 
 ---
 class: inverse, center, middle
@@ -83,6 +83,14 @@ df_boxplot |>
         panel.grid.major = element_line(colour = "gray70"))
 ```
 ]
+---
+
+# O tempo gasto em cada atividade
+
+<br><br><br><br>
+Os boxplots que acabamos de mostrar nos permitem observar que, de um modo geral, meus amigos não possuem hábitos tão distantes a ponto de conseguirmos identificar outliers em todas as atividades selecionadas.
+
+É claro que vemos alguém que faz mais atividades domésticas do que o restante,  outros que dormem bastante, e até mesmo um ser que já não liga para a própria saúde mental e passa quase 10 horas do seu dia apenas estudando, além de outra pessoa se mostrar mais limpinha que o restante. Mas de modo geral, eu realmente imaginava que os dados fossem dar resultados muito mais dispersos (obrigado amigos sedentários por não fazerem tanta atividade física ❤️).
 
 ---
 
@@ -90,13 +98,16 @@ df_boxplot |>
 
 .center[
 ```{r echo=FALSE}
-ggplot(df_activities) +
-  aes(x = value, y = n, fill = value) +
+barplot <- ggplot(df_activities) +
+  aes(y = value, x = n, fill = value) +
   geom_col() +
+  scale_x_continuous(
+    limits = c(0,1000)
+  ) +
   scale_fill_hue(direction = 1) +
   labs(
-    x = NULL,
-    y = "Unidades de tempo",
+    y = NULL,
+    x = "Unidades de tempo",
     title = "Soma do tempo gasto por atividade",
     caption = "1 unidade de tempo corresponde a 15 minutos"
   ) +
@@ -108,9 +119,34 @@ ggplot(df_activities) +
         plot.background = element_rect(fill = "#FAFAFA"),
         panel.grid.major = element_line(colour = "gray70")) +
   geom_text(aes(label = hora),
-            vjust = -1)
+            hjust = -0.5)
+
+barplot
+
+# barplot + 
+#   scale_y_discrete(
+#     name = NULL,
+#     labels = glue::glue("<img src = '{df_activities$img}'>")
+#   ) + 
+#   theme(
+#     axis.text.y = ggtext::element_markdown()
+#   )
+
+# tentativa falha de inserir imagem no nome da linha
 ```
 ]
+---
+
+# O tempo gasto em cada atividade
+
+<br><br><br>
+
+Acredito que o resultado observado se encaixa no que eu esperava observar. Isto é, todo mundo necessariamente dorme, então logicamente deveria ser a categoria com mais tempo gasto.
+
+O segundo e terceiro lugar podem terem sido influenciados pelo momento em que faço a pesquisa, já que é período de recesso em algumas universidades, e parte dos participantes são universitários.
+
+Fico feliz em ver o "lazer" logo ali! Me mostra que minhas amizades tem algum nível de preocupação consigo mesmas 🍾
+
 ---
 # Há relação entre as atividades?
 
@@ -120,8 +156,7 @@ corplot <- ggplot(melted_cormat, aes(Atividade1, Atividade2, fill = value))+
   scale_fill_distiller(palette = "Oranges", direction = 1) +
   labs(title = "Correlação entre as atividades",
        x = NULL, y = NULL) +
-  theme(legend.position = "none",
-    axis.text.x = element_text(angle = 90),
+  theme(axis.text.x = element_text(angle = 90),
         plot.title = element_text(hjust = 0.5,
                                   size = 16),
         panel.background = element_rect(fill = "#FAFAFA"),
@@ -130,10 +165,22 @@ corplot <- ggplot(melted_cormat, aes(Atividade1, Atividade2, fill = value))+
 
 shiny::div(
 plotly::ggplotly(corplot,
-                 width = 550,
+                 width = 600,
                  height = 550),
 align = "center")
 ```
+
+---
+
+# Há relação entre as atividades?
+
+<br><br>
+
+Como podemos verificar no gráfico de correlação plotado, a pesquisa não demonstrou grande nível de correlação entre as atividades selecionadas. Isso pode se dever a vários motivos, mas destaco aqui a falta de rigor metodológico, já que não há nenhum objetivo acadêmico por trás disso.
+
+Uma peça que se destaca no gráfico é a relação entre trabalho e estudo. Aparentemente há quase 72% de relação negativa entre a prática de um ou a de outro, o que faz sentido, visto que a maioria dos amigos que trabalha não estuda e vice-versa.
+
+Voltaremos a visitar este tema um pouco mais para frente.
 
 ---
 
@@ -145,12 +192,20 @@ class: inverse, center, middle
 
 # Quanto eles dormem?
 
-INSERIR INFORMAÇÕES:
+Confesso que neste momento tive um pouco de dificuldade para manipular os dados e alcançar os resultados por meio de cálculos. Sendo assim, para conseguir resolver o meu problema, como possuía um número contável de dados, optei por calcular os resultados manualmente e inserí-los na seguinte tabela, apenas para demonstrar o conhecimento do conteúdo que cobriu o pacote `reactable`.
 
-* Média de tempo;
-* Média de hora de ir dormir;
-* Média de hora de acordar
 
+.center[
+```{r echo=FALSE}
+reactable::reactable(df_tabela)
+```
+]
+
+Por não ser propriamente uma tabela, já que na verdade só tenho uma linha de informação, não tem muito o que mostrar, mas ficam aí os dados de curiosidade. Particularmente achei uma prática saudável!
+
+.footnote[
+* Confesso também que não tenho tanta certeza se meus cálculos estão certos, mas o que vale é a tabela estar aí 😅
+]
 ---
 
 class: inverse, center, middle
@@ -184,6 +239,22 @@ df_reg |>
         panel.grid.major = element_line(colour = "gray70"))
 ```
 ]
+---
+
+# Mais horas de sono implicam em algo?
+
+Tenho que assumir, eu tinha a hipótese de que meus amigos não dormiam bem, o que não se comprovou nessa pesquisa.
+
+Pensando nessa perspectiva de sono ruim (que não se comprovou, parabéns amigos 👏👏), eu queria entender o que eles mais estariam fazendo no lugar de dormir. Sendo assim, imaginei que a melhor forma de visualizar isso (além da correlação já plotada anteriormente), seria o de apresentar gráficos de dispersão com as retas de regressão a eles associadas, onde o eixo `Y` representa o tempo dormindo e o `X` a outra variável observada.
+
+Portanto, a conclusão de 30 segundos que podemos tirar é que quanto mais meus amigos dormem:
+
+Menos eles fazem tarefas domésticas, menos fazem atividades físicas, mais comem, descansam mais, se deslocam menos, estudam menos, se limpam menos, se divertem mais e trabalham menos.
+
+.footnote[
+Spoiler: se você for realmente rodar as regressões, verá que nenhuma delas apresenta um resultado significativo, mas mesmo assim é divertido olhar esses gráficos.
+]
+
 ---
 
 class: inverse, center, middle
@@ -254,7 +325,15 @@ knitr::include_graphics("output/dia_a_dia.gif")
 ```
 
 ---
+# Muito obrigado!
 
+<br><br><br>
+
+Agradeço à curso-R pelas incríveis aulas, ao IBPAD por me apoiar na realização deste curso, mas principalmente a todos os meus amigos e todas as minhas amigas que se dispuseram a preencher a planilha e sempre me apoiam no que eu faço!
+
+Se em algum momento exagerei na brincadeira nesta apresentação, peço desculpas, e pode me cobrar que eu te devo um docinho!
+
+---
 class: inverse, center, middle
 
 # Muito obrigado!
@@ -264,3 +343,7 @@ Amilcar L. do Prado G. Gramacho
 
 
 Slides criados com o pacote [*xaringan*](https://github.com/yihui/xaringan).
+
+.footnote[
+O repositório do Github associado a essa apresentação pode ser acessado [aqui.](https://github.com/amilcar-pg/dia_a_dia_amigos)
+]

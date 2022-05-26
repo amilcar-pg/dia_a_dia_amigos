@@ -47,3 +47,25 @@ ggplot(melted_cormat, aes(Atividade1, Atividade2, fill = value))+
         panel.background = element_rect(fill = "#FAFAFA"),
         plot.background = element_rect(fill = "#FAFAFA"),
         panel.grid.major = element_line(colour = "gray70"))
+
+## tabela ----
+
+# recuperando hora de dormir e de acordar do indivíduo
+# df_dormir <- df_raw |>
+#   dplyr::select(-c(24:33)) |>
+#   dplyr::rowwise() |>
+#   dplyr::mutate(
+#     dormindo = sum(dplyr::c_across(Amilcar:`Breno M.`) == "Dormindo")
+#   )
+# 
+# for (i in 3:(ncol(df_dormir)-1)){
+#   df_dormir[i] <- dplyr::case_when(
+#     df_dormir[i] == "Dormindo" ~ TRUE
+#   )
+# }; rm(i)
+# 
+# df_dormir <- df_dormir |>
+#   dplyr::select(-dormindo) |>
+#   dplyr::pivot_longer(Amilcar:`Breno M.`,
+#                names_to = "Amigo",
+#                values_to = "Dormindo")
